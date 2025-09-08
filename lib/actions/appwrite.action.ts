@@ -1,6 +1,9 @@
 "use server";
 import { account, databases, ID } from "@/app/appwrite";
 import { createAdminClient } from "@/appwrite/config";
+import auth from "@/auth";
+import { Query } from "appwrite";
+import { error } from "console";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
@@ -48,6 +51,7 @@ export async function signUp({
     return { success: false };
   }
 }
+// Login
 export async function createSession({
   email,
   password,
@@ -67,14 +71,61 @@ export async function createSession({
 
   redirect("/");
 }
+// Create Video
 
-export async function createVideo(file, name, category) {
-  const { storage } = createAdminClient();
-  const promise = await storage.createFile({
-    bucketId: "68b3f64c003898913ac8",
-    fileId: ID.unique(),
-    file: file,
-  });
+export async function createVideo({
+  file,
+  name,
+  category,
+  description,
+}: {
+  file: any;
+  name: string;
+  category: string;
+  description: string;
+}) {
+  try {
+    const { storage, databases } = createAdminClient();
+    const promise = await storage.createFile({
+      bucketId: "68b3f64c003898913ac8",
+      fileId: ID.unique(),
+      file: file,
+    });
+    const user = await auth.getUser();
+    const updateVideos = await databases.createRow(
+      "68b3e1e60033053f3c65", // databaseId
+      "videos", // collectionId
+      ID.unique(),
+      {
+        title: name,
+        userId: user.targets[0].userId,
+        category: category,
+        description: description,
+        storageId: promise.$id,
+        name: user.name,
+      }
+    );
+    // const updateProfile = databases.updateRow(
+    //   "68b3e1e60033053f3c65", // databaseId
+    //   "users", // collectionId
+    //   user.targets[0].userId,
+    //   {
+    //     videos: [
+    //       {
+    //         title: name,
+    //         category: category,
+    //         descrition: description,
+    //         storageId: promise.$id,
+    //       },
+    //     ],
+    //   }
+    // );
+    console.log(promise);
+    return { sucess: true };
+  } catch (error) {
+    console.log(error);
+    return { sucess: false };
+  }
 }
 // ============================== SIGN OUT
 export async function signOutAccount() {
@@ -87,7 +138,71 @@ export async function signOutAccount() {
     console.log(error);
   }
 }
+export async function listVideos() {
+  try {
+    const { storage, databases } = createAdminClient();
+    const promise = await databases.listRows(
+      "68b3e1e60033053f3c65", // databaseId
+      "videos" // collectionId
+    );
+    return { success: true, data: promise };
+  } catch (e) {
+    console.log(error);
+    return { succes: false };
+  }
+}
+export async function getVideoById({ id }: { id: string }) {
+  try {
+    const { storage } = createAdminClient();
+    const promise = await storage.getFile({
+      bucketId: "68b3f64c003898913ac8",
+      fileId: id,
+    });
+    return { success: true, data: promise };
+  } catch (error) {
+    console.log(error);
+    return { success: false };
+  }
+}
+// GetUserProfile
+export async function getUserProfileByID({ id }: { id: string }) {
+  try {
+    const { databases } = await createAdminClient();
+    const user = await databases.getRow(
+      "68b3e1e60033053f3c65", // databaseId
+      "users", // collectionId
+      id
+    );
+    return { succes: true, data: user };
+  } catch (error) {
+    console.log(error);
+    return { success: false };
+  }
+}
 
+export async function listVideosbyCategoryAndUser({
+  category,
+  userId,
+}: {
+  category: string;
+  userId: string;
+}) {
+  try {
+    const { storage, databases } = createAdminClient();
+    const promise = await databases.listRows(
+      "68b3e1e60033053f3c65", // databaseId
+      "videos",
+      [
+        // collectionId,
+        (Query.equal("userId", userId), Query.equal("category", category)),
+      ]
+    );
+    return { success: true, data: promise };
+  } catch (e) {
+    console.log(error);
+    return { succes: false };
+  }
+}
 // export const signIn = async ({ email, password }: signInProps) => {
 //   try {
 //     const { account } = await createAdminClient();

@@ -34,13 +34,13 @@ const Navbar = async () => {
           </Link>
         </div>
 
-        <div className="flex flex-row gap-[40px]">
+        <div className="md:flex md:flex-row md:gap-[40px] hidden">
           <Link href="/">Home</Link>
           <Link href="/feedback">Feedback</Link>
           <Link href="/dashboard">Dashboard</Link>
         </div>
         <div className="flex flex-row gap-[11px]  text-center justify-center items-center">
-          <p>{user?.name}</p>
+          <p className="hidden md:flex">{user?.name}</p>
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer">
               <Image
@@ -54,7 +54,9 @@ const Navbar = async () => {
             <DropdownMenuContent>
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
+              <DropdownMenuItem>
+                <Link href="/profile">Profile</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem>
                 <LogoutButton />
               </DropdownMenuItem>
