@@ -5,7 +5,7 @@ import React from "react";
 const LogoutButton = () => {
   return (
     <div>
-      <p onClick={() => signOutAccount()}>logOut</p>
+      <p onClick={() => signOutAccount()}>Logout</p>
     </div>
   );
 };

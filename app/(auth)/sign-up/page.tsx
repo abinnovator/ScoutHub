@@ -16,6 +16,8 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [sport, setSport] = useState("");
+  const [coach, setCoach] = useState(false);
 
   const login = async (email, password) => {
     const loggedIn = await loginWithEmailAndPassword({ email, password });
@@ -33,7 +35,13 @@ const SignUp = () => {
   };
 
   const register = async () => {
-    const signedUp = await signUp({ email, username: name, password });
+    const signedUp = await signUp({
+      email,
+      username: name,
+      password,
+      sport: sport,
+      coach: coach,
+    });
     if (signedUp.success) {
       login(email, password);
       redirect("/");
@@ -85,6 +93,24 @@ const SignUp = () => {
             onChange={(e) => setName(e.target.value)}
             className="border-b-black border-b-2 pb-1"
           />
+          <input
+            type="text"
+            placeholder="Sport"
+            value={sport}
+            onChange={(e) => setSport(e.target.value)}
+            className="border-b-black border-b-2 pb-1"
+          />
+          <div className="flex flex-row gap-2">
+            <p>Are you a coach</p>
+            <input
+              type="checkbox"
+              placeholder="Coach"
+              value={coach}
+              onChange={(e) => setCoach(e.target.checked)}
+              className="border-b-black border-b-2 pb-1"
+            />
+          </div>
+
           <Button type="button" onClick={() => register()}>
             Sign Up
           </Button>

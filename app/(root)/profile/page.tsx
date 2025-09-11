@@ -13,29 +13,36 @@ const page = async ({ params }: RouteParams) => {
 
   return (
     <div className="md:grid md:grid-cols-12 gap-3 md:m-16 flex flex-col md:grid-rows-12">
-      <div className=" border-black row-span-1 border-2 col-span-10 rounded-[20px] col-start-2 py-[46px] px-[22px] flex  flex-col">
-        <div className="flex flex-row gap-32">
+      <div className="border-black border-2 rounded-[20px] py-[46px] px-[22px] flex flex-col md:justify-between col-span-12">
+        <div className="flex flex-col md:flex-row gap-8 md:items-start">
           {databaseUser.data.profilePic ? (
-            <Image
+            <img
               src={databaseUser.data.profilePic}
               width={422}
               height={422}
-              alt=""
+              alt="User profile picture"
               className="rounded-4xl"
             />
           ) : (
-            <Image
-              src="/anonymous_user.png"
+            <img
+              src="https://placehold.co/422x422/F3F3F3/000000?text=Anonymous+User"
               width={422}
               height={422}
-              alt=""
+              alt="Anonymous user profile picture"
               className="rounded-4xl"
             />
           )}
-        </div>
-        <div className="flex flex-col">
-          <h1 className="text-3xl text-center">{databaseUser.data.username}</h1>
-          <p>Sport:{databaseUser.data.sport}</p>
+          <div className="flex flex-col mt-4 md:mt-0">
+            <h1 className="text-3xl text-center md:text-left font-bold">
+              {databaseUser.data.username}
+            </h1>
+            <p className="mt-2 text-center md:text-left">
+              Sport: {databaseUser.data.sport}
+            </p>
+            <p className="text-center md:text-left">
+              Position: {databaseUser.data.position}
+            </p>
+          </div>
         </div>
       </div>
     </div>

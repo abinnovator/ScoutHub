@@ -6,6 +6,7 @@ import { Query } from "appwrite";
 import { error } from "console";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
+import { createVideoFeedback } from "./gemini.action";
 
 export async function loginWithEmailAndPassword({
   email,
@@ -26,10 +27,14 @@ export async function signUp({
   email,
   username,
   password,
+  sport,
+  coach,
 }: {
   email: string;
   username: string;
   password: string;
+  sport: string;
+  coach: boolean;
 }) {
   const { databases } = await createAdminClient();
   try {
@@ -43,7 +48,7 @@ export async function signUp({
       "68b3e1e60033053f3c65", // databaseId
       "users", // collectionId
       session.$id,
-      { email: email, username: username }
+      { email: email, username: username, sport: sport, coach: coach }
     );
     return { success: true };
   } catch (e) {
@@ -203,31 +208,43 @@ export async function listVideosbyCategoryAndUser({
     return { succes: false };
   }
 }
-// export const signIn = async ({ email, password }: signInProps) => {
-//   try {
-//     const { account } = await createAdminClient();
 
-//     // Creating a session
-//     const response = await account.createEmailPasswordSession(email, password);
-
-//     // Check if the response contains the session token
-//     if (!response) {
-//       throw new Error("Session creation failed");
-//     }
-
-//     // Set the session in cookies
-//     (await
-//       // Set the session in cookies
-//       cookies()).set("appwrite-session", response.secret, {
-//       path: "/",
-//       httpOnly: true,
-//       sameSite: "strict",
-//       secure: true,
-//     });
-
-//     return parseStringify(response); // Return parsed response
-//   } catch (error) {
-//     console.error("Error while signing in:", error);
-//     return { error: "Failed to create session", details: error };
-//   }
-// };
+// Create Feedback
+export async function createTrainingFeedback({
+  storageId,
+  databaseId,
+}: {
+  storageId: string;
+  databaseId: string;
+}) {
+  try {
+    const { databases } = createAdminClient();
+    const feedback = await createVideoFeedback({
+      storageId: storageId,
+    });
+    const updatedDatabase = databases.updateRow({
+      databaseId: "68b3e1e60033053f3c65", // databaseId
+      tableId: "videos", // collectionId
+      rowId: databaseId,
+      data: { feedback: feedback },
+    });
+    return { success: true };
+  } catch (error) {
+    console.log(error);
+    return { success: false };
+  }
+}
+export async function getVideoInfoById({ id }: { id: string }) {
+  try {
+    const { databases } = createAdminClient();
+    const promise = await databases.getRow(
+      "68b3e1e60033053f3c65", // databaseId
+      "videos",
+      id
+    );
+    return { success: true, data: promise };
+  } catch (error) {
+    console.log(error);
+    return { success: false };
+  }
+}
