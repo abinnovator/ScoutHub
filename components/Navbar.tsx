@@ -20,6 +20,7 @@ const Navbar = async () => {
   const logout = async () => {
     await signOutAccount();
   };
+
   return (
     <div className="py-2 ">
       <div className="flex flex-row justify-between border-b border-b-[#D9D9D9] px-5 items-center w-full overflow-x-hidden overflow-y-hidden max-h-[64px]">
@@ -48,7 +49,9 @@ const Navbar = async () => {
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer">
               <Image
-                src="https://cloud.appwrite.io/v1/avatars/initials?name=A+B&width=192&height=192&project=console"
+                src={`https://cloud.appwrite.io/v1/avatars/initials?name=${encodeURIComponent(
+                  user?.name || "User"
+                )}&width=192&height=192&project=console`}
                 alt=""
                 height={50}
                 width={50}
