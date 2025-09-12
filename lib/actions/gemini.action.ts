@@ -32,13 +32,13 @@ export async function createVideoFeedback({
 
   // 1️⃣ Get file metadata
   const fileMetadata = await storage.getFile({
-    bucketId: "68b3f64c003898913ac8",
+    bucketId: process.env.NEXT_PUBLIC_BUCKET_ID,
     fileId: storageId,
   });
 
   // 2️⃣ Download file
   const fileDownload = await storage.getFileDownload(
-    "68b3f64c003898913ac8",
+    process.env.NEXT_PUBLIC_BUCKET_ID,
     storageId
   );
   const arrayBuffer = fileDownload;

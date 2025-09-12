@@ -49,6 +49,7 @@ const SignUp = () => {
       redirect("/");
     } else {
       console.log("There was an error");
+      toast("there was an error");
     }
   };
 

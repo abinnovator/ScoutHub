@@ -45,7 +45,7 @@ export async function signUp({
       username
     );
     const promise = databases.createRow(
-      "68b3e1e60033053f3c65", // databaseId
+      process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       "users", // collectionId
       session.$id,
       { email: email, username: username, sport: sport, coach: coach }
@@ -53,7 +53,7 @@ export async function signUp({
     return { success: true };
   } catch (e) {
     console.log(e);
-    return { success: false };
+    return { success: false, error: error };
   }
 }
 // Login
@@ -98,7 +98,7 @@ export async function createVideo({
     });
     const user = await auth.getUser();
     const updateVideos = await databases.createRow(
-      "68b3e1e60033053f3c65", // databaseId
+      process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       "videos", // collectionId
       ID.unique(),
       {
@@ -111,7 +111,7 @@ export async function createVideo({
       }
     );
     // const updateProfile = databases.updateRow(
-    //   "68b3e1e60033053f3c65", // databaseId
+    //   process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
     //   "users", // collectionId
     //   user.targets[0].userId,
     //   {
@@ -149,7 +149,7 @@ export async function listVideos() {
   try {
     const { storage, databases } = createAdminClient();
     const promise = await databases.listRows(
-      "68b3e1e60033053f3c65", // databaseId
+      process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       "videos" // collectionId
     );
     return { success: true, data: promise };
@@ -176,7 +176,7 @@ export async function getUserProfileByID({ id }: { id: string }) {
   try {
     const { databases } = await createAdminClient();
     const user = await databases.getRow(
-      "68b3e1e60033053f3c65", // databaseId
+      process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       "users", // collectionId
       id
     );
@@ -197,7 +197,7 @@ export async function listVideosbyCategoryAndUser({
   try {
     const { storage, databases } = createAdminClient();
     const promise = await databases.listRows(
-      "68b3e1e60033053f3c65", // databaseId
+      process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       "videos",
       [
         // collectionId,
@@ -225,7 +225,7 @@ export async function createTrainingFeedback({
       storageId: storageId,
     });
     const updatedDatabase = databases.updateRow({
-      databaseId: "68b3e1e60033053f3c65", // databaseId
+      databaseId: process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       tableId: "videos", // collectionId
       rowId: databaseId,
       data: { feedback: feedback },
@@ -240,7 +240,7 @@ export async function getVideoInfoById({ id }: { id: string }) {
   try {
     const { databases } = createAdminClient();
     const promise = await databases.getRow(
-      "68b3e1e60033053f3c65", // databaseId
+      process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       "videos",
       id
     );
