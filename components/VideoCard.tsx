@@ -3,9 +3,10 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 import Player from "next-video/player";
+
 import { cn } from "@/lib/utils";
 import { createVideoFeedback } from "@/lib/actions/gemini.action";
-import video from "next-video";
+
 import { createTrainingFeedback } from "@/lib/actions/appwrite.action";
 
 const VideoCard = ({
@@ -75,7 +76,7 @@ const VideoCard = ({
         />
         {/* Text */}
         <div className="flex flex-col px-4 py-4 flex-1">
-          <h2 className="font-sans text-lg font-medium text-black mb-1">
+          <h2 className="font-sans text-lg font-medium text-black mb-1 capitalize">
             {video.title}
           </h2>
           <div className="text-gray-300 font-semibold text-base leading-none">

@@ -22,6 +22,8 @@ import {
   SelectValue,
 } from "./ui/select";
 import { createVideo } from "@/lib/actions/appwrite.action";
+import { toast } from "sonner";
+import { redirect } from "next/navigation";
 
 const formSchema = z.object({
   title: z.string().min(2, {
@@ -53,6 +55,7 @@ export function ProfileForm() {
 
     // Update the state with the selected file
     setSelectedFile(file);
+    toast("File has been selected");
 
     // You can now access the file data here for further processing
     console.log(file);
@@ -69,7 +72,11 @@ export function ProfileForm() {
       category: values.category,
       file: selectedFile,
     });
-    console.log(add);
+    console.log(add.sucess);
+    if (add.sucess) {
+      toast("Video has been created");
+      redirect("/");
+    }
   }
 
   return (

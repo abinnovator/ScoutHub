@@ -112,9 +112,9 @@ const LoginPage = () => {
           >
             Login
           </Button>
-          <Button type="button" onClick={() => logout()}>
+          {/* <Button type="button" onClick={() => logout()}>
             Log Out
-          </Button>
+          </Button> */}
           <p>
             Dont have an account? <Link href="/sign-up">Sign Up</Link>
           </p>

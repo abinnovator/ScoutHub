@@ -10,6 +10,7 @@ import {
   signUp,
 } from "@/lib/actions/appwrite.action";
 import Link from "next/link";
+import { toast } from "sonner";
 
 const SignUp = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -43,6 +44,7 @@ const SignUp = () => {
       coach: coach,
     });
     if (signedUp.success) {
+      toast("Account has been created.");
       login(email, password);
       redirect("/");
     } else {
