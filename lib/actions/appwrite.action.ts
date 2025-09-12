@@ -105,7 +105,7 @@ export async function createVideo({
         title: name,
         userId: user.targets[0].userId,
         category: category,
-        description: description,
+        Description: description,
         storageId: promise.$id,
         name: user.name,
       }
