@@ -1,6 +1,6 @@
 "use server";
 import { account, databases, ID } from "@/app/appwrite";
-import { createAdminClient } from "@/appwrite/config";
+import { createAdminClient, createSessionClient } from "@/appwrite/config";
 import auth from "@/auth";
 import { Query } from "appwrite";
 import { error } from "console";
@@ -134,14 +134,16 @@ export async function createVideo({
 }
 // ============================== SIGN OUT
 export async function signOutAccount() {
+  auth.sessionCookie = (await cookies()).get("session");
   try {
-    const { account } = await createAdminClient();
-    const session = await account.deleteSession("current");
+    const { account } = await createSessionClient(auth.sessionCookie.value);
+    await account.deleteSession("current");
+  } catch (error) {}
 
-    return session;
-  } catch (error) {
-    console.log(error);
-  }
+  (await cookies()).delete("session");
+  auth.user = null;
+  auth.sessionCookie = null;
+  redirect("/sign-in");
 }
 export async function listVideos() {
   try {
