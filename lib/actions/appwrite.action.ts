@@ -7,6 +7,7 @@ import { error } from "console";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createVideoFeedback } from "./gemini.action";
+import { toast } from "sonner";
 
 export async function loginWithEmailAndPassword({
   email,
@@ -220,6 +221,7 @@ export async function createTrainingFeedback({
   databaseId: string;
 }) {
   try {
+    toast("Feedback is generatin");
     const { databases } = createAdminClient();
     const feedback = await createVideoFeedback({
       storageId: storageId,

@@ -48,7 +48,7 @@ const VideoCard = ({
       >
         {/* Video Player */}
         <Player
-          src={`https://fra.cloud.appwrite.io/v1/storage/buckets/68b3f64c003898913ac8/files/${video.storageId}/view?project=68b2aa3a0033c99238f3`}
+          src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${video.storageId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
           className="lg:w-[299px] lg:max-h-48 md:w-[250px] md:max-h-48"
         />
 
