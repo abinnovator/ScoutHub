@@ -113,9 +113,3 @@ GNU General Public License v3.0
 
 Aadit Bhambri
 Portfolio - https://aaditbhambri.com
-
-
-
-## Demo
-
-https://youtu.be/b-b22ZWNTfE
