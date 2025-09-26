@@ -14,6 +14,9 @@ import {
 import auth from "@/auth";
 import LogoutButton from "./logoutButton";
 import { signOutAccount } from "@/lib/actions/appwrite.action";
+import { ModeToggle } from "./ThemeToggle";
+import { SidebarTrigger } from "./ui/sidebar";
+import { SidebarDemo } from "./CollapsibleSidebar";
 
 const Navbar = async () => {
   const user = await auth.getUser();
@@ -23,7 +26,7 @@ const Navbar = async () => {
 
   return (
     <div className="py-2 ">
-      <div className="flex flex-row justify-between border-b border-b-[#D9D9D9] px-5 items-center w-full overflow-x-hidden overflow-y-hidden max-h-[64px]">
+      <div className="flex flex-row justify-between border-b border-b-[#D9D9D9] dark:border-b-[#FFFFFF]/25 px-5 items-center w-full overflow-x-hidden overflow-y-hidden max-h-[64px]">
         <div className="flex flex-row gap-2">
           <Link href="/">
             <Image
@@ -33,6 +36,8 @@ const Navbar = async () => {
               height={190}
             />
           </Link>
+          {/* <SidebarDemo /> */}
+          {/* <SidebarTrigger /> */}
         </div>
 
         <div className="md:flex md:flex-row md:gap-[40px] hidden">
@@ -45,7 +50,8 @@ const Navbar = async () => {
           {/* <Link href="/dashboard">Dashboard</Link> */}
         </div>
         <div className="flex flex-row gap-[11px]  text-center justify-center items-center">
-          <p className="hidden md:flex">{user?.name}</p>
+          {/* <p className="hidden md:flex">{user?.name}</p> */}
+          <ModeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger className="cursor-pointer">
               <Image

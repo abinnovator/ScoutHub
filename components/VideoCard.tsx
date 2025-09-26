@@ -44,6 +44,7 @@ const VideoCard = ({
     phoneVerification: false;
     mfa: false;
     prefs: object;
+
     targets: [
       {
         $id: string;
@@ -60,11 +61,12 @@ const VideoCard = ({
     accessedAt: string;
   };
 }) => {
+  console.log(user);
   return (
     <div>
       <div
         className={cn(
-          "bg-white rounded-2xl shadow overflow-hidden flex flex-col",
+          "bg-white rounded-2xl shadow overflow-hidden flex flex-col dark:bg-black",
           video.userId != user.targets[0].userId && "w-[299px] h-[297px]"
         )}
         key={video.$id}
@@ -76,7 +78,7 @@ const VideoCard = ({
         />
         {/* Text */}
         <div className="flex flex-col px-4 py-4 flex-1">
-          <h2 className="font-sans text-lg font-medium text-black mb-1 capitalize">
+          <h2 className="font-sans text-lg font-medium light:text-black mb-1 capitalize">
             {video.title}
           </h2>
           <div className="text-gray-300 font-semibold text-base leading-none">
@@ -107,6 +109,26 @@ const VideoCard = ({
             )}
           </Button>
         )}
+        {/* {user.targets[0].userId && (
+          <Button>
+            {video.feedback ? (
+              <Button>
+                <Link href={`/videos/${video.$id}`}>View Feedback</Link>
+              </Button>
+            ) : (
+              <Button
+                onClick={() =>
+                  createTrainingFeedback({
+                    storageId: video.storageId,
+                    databaseId: video.$id,
+                  })
+                }
+              >
+                Generate Feedback
+              </Button>
+            )}
+          </Button>
+        )} */}
       </div>
     </div>
   );
