@@ -16,7 +16,6 @@ import LogoutButton from "./logoutButton";
 import { signOutAccount } from "@/lib/actions/appwrite.action";
 import { ModeToggle } from "./ThemeToggle";
 import { SidebarTrigger } from "./ui/sidebar";
-import { SidebarDemo } from "./CollapsibleSidebar";
 
 const Navbar = async () => {
   const user = await auth.getUser();
@@ -40,15 +39,15 @@ const Navbar = async () => {
           {/* <SidebarTrigger /> */}
         </div>
 
-        <div className="md:flex md:flex-row md:gap-[40px] hidden">
+        {/* <div className="md:flex md:flex-row md:gap-[40px] hidden">
           <Link href="/">Home</Link>
           <Link href="/dashboard">Dashboard</Link>
-
-          {/* <Link href="/feedback">Feedback</Link> */}
+          
+          
           <Link href="/profile">Profile</Link>
-
-          {/* <Link href="/dashboard">Dashboard</Link> */}
-        </div>
+          
+          
+        </div> */}
         <div className="flex flex-row gap-[11px]  text-center justify-center items-center">
           {/* <p className="hidden md:flex">{user?.name}</p> */}
           <ModeToggle />
