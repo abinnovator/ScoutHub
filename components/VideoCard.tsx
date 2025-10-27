@@ -2,7 +2,8 @@
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import Player from "next-video/player";
+
+import Video from "next-video";
 
 import { cn } from "@/lib/utils";
 import { createVideoFeedback } from "@/lib/actions/gemini.action";
@@ -72,8 +73,13 @@ const VideoCard = ({
         key={video.$id}
       >
         {/* Video Player */}
-        <Player
-          src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${video.storageId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
+        <Video
+          src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${
+            process.env.NEXT_PUBLIC_BUCKET_ID || "68b3f64c003898913ac8"
+          }/files/${video.storageId}/view?project=${
+            process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID ||
+            "68c447580000ec4685da"
+          }`}
           className="lg:w-[299px] lg:max-h-48 md:w-[250px] md:max-h-48"
         />
         {/* Text */}
@@ -90,7 +96,7 @@ const VideoCard = ({
         </div>
         {/* Feedback */}
         {video.userId == user.targets[0].userId && (
-          <Button>
+          <>
             {video.feedback ? (
               <Button>
                 <Link href={`/videos/${video.$id}`}>View Feedback</Link>
@@ -107,7 +113,7 @@ const VideoCard = ({
                 Generate Feedback
               </Button>
             )}
-          </Button>
+          </>
         )}
         {/* {user.targets[0].userId && (
           <Button>

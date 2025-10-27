@@ -2,7 +2,7 @@
 import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
-import Player from "next-video/player";
+import Video from "next-video";
 import { cn } from "@/lib/utils";
 import { createTrainingFeedback } from "@/lib/actions/appwrite.action";
 
@@ -47,7 +47,7 @@ const VideoCard = ({
         key={video.$id}
       >
         {/* Video Player */}
-        <Player
+        <Video
           src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${process.env.NEXT_PUBLIC_BUCKET_ID}/files/${video.storageId}/view?project=${process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID}`}
           className="lg:w-[299px] lg:max-h-48 md:w-[250px] md:max-h-48"
         />

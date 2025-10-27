@@ -34,6 +34,7 @@ import {
 } from "@/components/ui/sidebar";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import { Separator } from "@radix-ui/react-dropdown-menu";
 
 const data = {
   user: {
@@ -54,7 +55,7 @@ const data = {
     },
     {
       title: "My videos",
-      url: "/videos",
+      url: "/my-videos",
       icon: IconChartBar,
     },
   ],
@@ -80,7 +81,7 @@ const data = {
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
@@ -95,14 +96,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
+        <Separator
+          orientation="vertical"
+          className="mx-2 data-[orientation=vertical]:h-4 "
+        />
       </SidebarHeader>
+
       <SidebarContent>
         <NavMain items={data.navMain} />
         {/* <NavDocuments items={data.documents} /> */}
         <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        {/* <NavUser user={data.user} /> */}
         <Button className="px-4 py-3">
           <Link href="/videos/upload">Upload Video</Link>
         </Button>
