@@ -35,6 +35,7 @@ import {
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Separator } from "@radix-ui/react-dropdown-menu";
+import { UserRound } from "lucide-react";
 
 const data = {
   user: {
@@ -48,15 +49,16 @@ const data = {
       url: "/",
       icon: IconDashboard,
     },
-    {
-      title: "Trending",
-      url: "/trending",
-      icon: IconListDetails,
-    },
+
     {
       title: "My videos",
       url: "/my-videos",
       icon: IconChartBar,
+    },
+    {
+      title: "Profile",
+      url: "/profile",
+      icon: UserRound,
     },
   ],
 
@@ -70,11 +72,6 @@ const data = {
       title: "Get Help",
       url: "#",
       icon: IconHelp,
-    },
-    {
-      title: "Search",
-      url: "#",
-      icon: IconSearch,
     },
   ],
 };

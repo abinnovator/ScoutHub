@@ -27,8 +27,11 @@ export function NavMain({
         <SidebarMenu></SidebarMenu>
         <SidebarMenu>
           {items.map((item) => (
-            <Link key={item.title} href={item.url}>
-              <SidebarMenuItem key={item.title} className="px-3 py-4">
+            <Link key={item.title} href={item.url} className="cursor-pointer">
+              <SidebarMenuItem
+                key={item.title}
+                className="px-3 py-4 cursor-pointer"
+              >
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon && <item.icon />}
                   <span className="text-[16px]">{item.title}</span>

@@ -3,7 +3,7 @@ import React from "react";
 import { Button } from "./ui/button";
 import Link from "next/link";
 
-import Video from "next-video";
+
 
 import { cn } from "@/lib/utils";
 import { createVideoFeedback } from "@/lib/actions/gemini.action";
@@ -73,14 +73,17 @@ const VideoCard = ({
         key={video.$id}
       >
         {/* Video Player */}
-        <Video
-          src={`https://fra.cloud.appwrite.io/v1/storage/buckets/${
-            process.env.NEXT_PUBLIC_BUCKET_ID || "68b3f64c003898913ac8"
-          }/files/${video.storageId}/view?project=${
-            process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID ||
-            "68c447580000ec4685da"
-          }`}
+        <video
+          src={`/api/video?url=${encodeURIComponent(
+            `https://fra.cloud.appwrite.io/v1/storage/buckets/${
+              process.env.NEXT_PUBLIC_BUCKET_ID || "68b3f64c003898913ac8"
+            }/files/${video.storageId}/view?project=${
+              process.env.NEXT_PUBLIC_APPWRITE_PROJECT_ID ||
+              "68c447580000ec4685da"
+            }`
+          )}`}
           className="lg:w-[299px] lg:max-h-48 md:w-[250px] md:max-h-48"
+          controls
         />
         {/* Text */}
         <div className="flex flex-col px-4 py-4 flex-1">
