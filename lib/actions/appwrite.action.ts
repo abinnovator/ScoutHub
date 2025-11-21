@@ -65,17 +65,22 @@ export async function createSession({
   email: string;
   password: string;
 }) {
-  const { account } = await createAdminClient();
-  const session = await account.createEmailPasswordSession(email, password);
-  (await cookies()).set("session", session.secret, {
-    httpOnly: true,
-    sameSite: "strict",
-    secure: true,
-    expires: new Date(session.expire),
-    path: "/",
-  });
+  try {
+    const { account } = await createAdminClient();
+    const session = await account.createEmailPasswordSession(email, password);
+    (await cookies()).set("session", session.secret, {
+      httpOnly: true,
+      sameSite: "strict",
+      secure: true,
+      expires: new Date(session.expire),
+      path: "/",
+    });
 
-  redirect("/");
+    return { success: true };
+  } catch (e) {
+    console.log(e);
+    return { success: false, message: e?.message || "Unknown error" };
+  }
 }
 // Create Video
 

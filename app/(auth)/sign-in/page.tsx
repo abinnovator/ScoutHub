@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 import Link from "next/link";
 
 import { createSession } from "@/lib/actions/appwrite.action";
+import { toast } from "sonner";
 
 const LoginPage = () => {
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -71,6 +72,15 @@ const LoginPage = () => {
     await account.deleteSession("current");
     setLoggedInUser(null);
   };
+  const logIn = async () => {
+    const result = await createSession({ email, password });
+    if (result.success) {
+      // navigate, toast,...
+      redirect("/");
+    } else {
+      toast.error(result.message);
+    }
+  };
 
   return (
     <div className="  w-screen h-screen flex flex-row items-center justify-center gap-[-3]">
@@ -106,10 +116,7 @@ const LoginPage = () => {
             onChange={(e) => setName(e.target.value)}
             className="border-b-black border-b-2 pb-1"
           /> */}
-          <Button
-            type="button"
-            onClick={() => createSession({ email, password })}
-          >
+          <Button type="button" onClick={() => logIn()}>
             Login
           </Button>
           {/* <Button type="button" onClick={() => logout()}>
