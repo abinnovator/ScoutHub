@@ -32,7 +32,7 @@ const page = async () => {
       {/* Agility Videos */}
       <div className=" gap-7 flex flex-col">
         <h1>Agility Videos</h1>
-        <div className="md:grid grid-cols-2 lg:grid-cols-4 gap-4 flex flex-col">
+        <div className="grid grid-cols-4 gap-4">
           <div className="bg-[#D9D9D9] rounded-[20px] max-w-[324.61px] h-[225] justify-center items-center flex">
             <Link href="/videos/upload">
               <p className="text-white text-center text-[48px]">+</p>
@@ -48,7 +48,7 @@ const page = async () => {
       {/* Speed Videos */}
       <div className=" gap-7 flex flex-col">
         <h1>Speed Videos</h1>
-        <div className="md:grid grid-cols-2 lg:grid-cols-4 gap-4 flex flex-col">
+        <div className="grid grid-cols-4 gap-4">
           <div className="bg-[#D9D9D9] rounded-[20px] max-w-[324.61px] h-[225] justify-center items-center flex">
             <Link href="/videos/upload">
               <p className="text-white text-center text-[48px]">+</p>
@@ -64,7 +64,7 @@ const page = async () => {
       {/* Dribbling Videos */}
       <div className=" gap-7 flex flex-col">
         <h1>Dribbling Videos</h1>
-        <div className="md:grid grid-cols-2 lg:grid-cols-4 gap-4 flex flex-col">
+        <div className="grid grid-cols-4 gap-4">
           <div className="bg-[#D9D9D9] rounded-[20px] max-w-[324.61px] h-[225] justify-center items-center flex">
             <Link href="/videos/upload">
               <p className="text-white text-center text-[48px]">+</p>
@@ -80,7 +80,7 @@ const page = async () => {
       {/* Keeping Videos */}
       <div className=" gap-7 flex flex-col">
         <h1>Keeping Videos</h1>
-        <div className="md:grid grid-cols-2 lg:grid-cols-4 gap-4 flex flex-col">
+        <div className="grid grid-cols-4 gap-4">
           <div className="bg-[#D9D9D9] rounded-[20px] max-w-[324.61px] h-[225] justify-center items-center flex">
             <Link href="/videos/upload">
               <p className="text-white text-center text-[48px]">+</p>

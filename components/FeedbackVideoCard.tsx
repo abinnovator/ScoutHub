@@ -64,7 +64,7 @@ const VideoCard = ({
     <div>
       <div
         className={cn(
-          "bg-white rounded-2xl shadow overflow-hidden flex flex-col"
+          "bg-white dark:bg-black text-black dark:text-white rounded-2xl shadow overflow-hidden flex flex-col"
         )}
         key={video.$id}
       >
@@ -76,8 +76,8 @@ const VideoCard = ({
           className="lg:w-[873px] lg:max-h-[674px] md:w-[250px] md:max-h-48"
         />
         {/* Text */}
-        <div className="flex flex-col px-4 py-4 flex-1">
-          <h2 className="font-sans text-lg font-medium text-black mb-1">
+        <div className="flex flex-col px-4 py-4 flex-1 bg-black">
+          <h2 className="font-sans text-lg font-medium text-black dark:text-white mb-1">
             {video.title}
           </h2>
           <div className="text-gray-300 font-semibold text-base leading-none">

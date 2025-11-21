@@ -31,7 +31,7 @@
     "@tabler/icons-react": "^3.35.0",
     "@tanstack/react-table": "^8.21.3",
     "@tensorflow/tfjs": "^4.22.0",
-    "appwrite": "^18.1.1",
+    "appwrite": "^18.2.0",
     "axios": "^1.11.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",

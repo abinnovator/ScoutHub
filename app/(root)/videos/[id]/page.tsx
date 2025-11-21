@@ -20,7 +20,9 @@ const page = async ({ params }: RouteParams) => {
 
       <div className="col-span-4 border-black border-2 rounded-4xl">
         <h1 className="text-center">Ai Feedback</h1>
-        <ReactMarkdown>{video.data.feedback}</ReactMarkdown>
+        {video.data?.feedback && (
+          <ReactMarkdown>{video.data.feedback}</ReactMarkdown>
+        )}
       </div>
     </div>
   );

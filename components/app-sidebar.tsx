@@ -2,27 +2,15 @@
 
 import * as React from "react";
 import {
-  IconCamera,
   IconChartBar,
-  IconDashboard,
-  IconDatabase,
-  IconFileAi,
-  IconFileDescription,
-  IconFileWord,
-  IconFolder,
   IconHelp,
   IconInnerShadowTop,
-  IconListDetails,
-  IconReport,
-  IconSearch,
   IconSettings,
-  IconUsers,
+  IconUpload,
 } from "@tabler/icons-react";
 
-import { NavDocuments } from "@/components/nav-documents";
 import { NavMain } from "@/components/nav-main";
 import { NavSecondary } from "@/components/nav-secondary";
-import { NavUser } from "@/components/nav-user";
 import {
   Sidebar,
   SidebarContent,
@@ -35,7 +23,8 @@ import {
 import { Button } from "./ui/button";
 import Link from "next/link";
 import { Separator } from "@radix-ui/react-dropdown-menu";
-import { UserRound } from "lucide-react";
+import { HomeIcon, LogOut, Upload, UserRound } from "lucide-react";
+import { signOutAccount } from "@/lib/actions/appwrite.action";
 
 const data = {
   user: {
@@ -47,7 +36,7 @@ const data = {
     {
       title: "Home",
       url: "/",
-      icon: IconDashboard,
+      icon: HomeIcon,
     },
 
     {
@@ -74,6 +63,13 @@ const data = {
       icon: IconHelp,
     },
   ],
+  navFooter: [
+    {
+      title: "Upload Video",
+      url: "/videos/upload",
+      icon: IconUpload,
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -82,14 +78,13 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-              asChild
-              className="data-[slot=sidebar-menu-button]:!p-1.5"
-            >
-              <a href="#">
+            <SidebarMenuButton asChild className="">
+              <div>
                 <IconInnerShadowTop className="!size-5" />
-                <span className="text-base font-semibold">Scouthub</span>
-              </a>
+                <span className="dark:text-white font-medium text-2xl ">
+                  Scout<span className="text-[#FF7000]">Hub</span>
+                </span>
+              </div>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
@@ -101,13 +96,18 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
 
       <SidebarContent>
         <NavMain items={data.navMain} />
-        {/* <NavDocuments items={data.documents} /> */}
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-        {/* <NavUser user={data.user} /> */}
         <Button className="px-4 py-3">
+          <Upload className="!size-4" />
           <Link href="/videos/upload">Upload Video</Link>
+        </Button>
+        <Button
+          className="px-4 py-3 dark:bg-white dark:text-black cursor-pointer"
+          onClick={() => signOutAccount()}
+        >
+          <LogOut className="!size-4" />
+          Logout
         </Button>
       </SidebarFooter>
     </Sidebar>
