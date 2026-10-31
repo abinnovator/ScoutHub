@@ -3,7 +3,6 @@ import { account, databases, ID } from "@/app/appwrite";
 import { createAdminClient, createSessionClient } from "@/appwrite/config";
 import auth from "@/auth";
 import { Query } from "appwrite";
-import { error } from "console";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import { createVideoFeedback } from "./gemini.action";
@@ -45,16 +44,19 @@ export async function signUp({
       password,
       username
     );
-    const promise = databases.createRow(
+    await databases.createRow(
       process.env.NEXT_PUBLIC_DATABASE_ID, // databaseId
       "users", // collectionId
       session.$id,
       { email: email, username: username, sport: sport, coach: coach }
     );
     return { success: true };
-  } catch (e) {
-    console.log(e);
-    return { success: false, error: error };
+  } catch (e: unknown) {
+    console.error(e);
+    return {
+      success: false,
+      error: e instanceof Error ? e.message : "Unable to create account",
+    };
   }
 }
 // Login
